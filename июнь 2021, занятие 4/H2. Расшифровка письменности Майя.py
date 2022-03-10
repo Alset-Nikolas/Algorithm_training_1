@@ -10,7 +10,7 @@ def prefix_func(text, n):
         if text[i] == text[p]:
             p += 1
         PI[i] = p
-    return PI.count(n)
+    return PI.cpunt(n)
 
 
 def main(g, W):
@@ -20,6 +20,7 @@ def main(g, W):
     for i, x in enumerate(vars_g):
         res += prefix_func("".join(x) + "#" + W, len(g))
     return res
+
 
 
 if __name__ == '__main__':
