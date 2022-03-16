@@ -35,15 +35,4 @@ if __name__ == '__main__':
     res = main(w, h, n)
     print(res)
 
-#     assert main(2, 3, 10) == 9
-#
-# import random
-# i=0
-# while 1:
-#     print(i)
-#     i += 1
-#     w, h, n = random.randint(1, 100), random.randint(1, 100), random.randint(1, 100)
-#     if main2(w, h, n) != main(w,h,n):
-#         print(w,h,n)
-#         print(main(w,h,n))
-#         print(main2(w,h,n))
+    assert main(2, 3, 10) == 9
