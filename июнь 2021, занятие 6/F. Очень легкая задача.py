@@ -1,4 +1,4 @@
-def calc_T(parametrs, n):
+def func_T(parametrs, n):
     '''Зависимость времени от количества деталей, которые делает медленный принтер'''
     N, t_fast, t_slow = parametrs
     return max(t_fast * (N - n), t_slow * n)
@@ -11,7 +11,7 @@ def calk_opt_n(parametrs):
     n_max = N
     while n_max > n_min:
         n_middle = (n_min + n_max) // 2
-        if calc_T(parametrs, n_middle) <= calc_T(parametrs, n_middle + 1):
+        if func_T(parametrs, n_middle) <= func_T(parametrs, n_middle + 1):
             n_max = n_middle
         else:
             n_min = n_middle + 1
@@ -21,7 +21,7 @@ def calk_opt_n(parametrs):
 def calc_answer(t_fast, t_slow, N):
     parametrs = N, t_fast, t_slow
     n_opt = calk_opt_n(parametrs)
-    return calc_T(parametrs, n_opt)
+    return func_T(parametrs, n_opt)
 
 
 
