@@ -1,3 +1,6 @@
+'''Топорный вариант'''
+
+
 def calc_item(k, L, R):
     i_L = 0
     i_R = 0
@@ -27,6 +30,6 @@ for i in range(N):
     Lists.append(list(map(int, input().split())))
 for i in range(N):
     first_list = Lists[i]
-    for j in range(i+1, N):
+    for j in range(i + 1, N):
         second_list = Lists[j]
         print(calc_item(K, first_list, second_list))
