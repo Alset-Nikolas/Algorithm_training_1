@@ -1,3 +1,5 @@
+'''Топорный вариант'''
+
 def calc_item(k, L, R):
     i_L = 0
     i_R = 0
@@ -18,23 +20,24 @@ def calc_item(k, L, R):
             res = L[i_L]
             i_L += 1
         res_i += 1
+    del i_L, i_R, res_i
     return res
 
 
-
 n, k = list(map(int, input().split()))
-data  = []
+data = [[] for x in range(n)]
 for i in range(n):
     x1, d1, a, c, m = list(map(int, input().split()))
-    d = [d1]
-    x = [x1]
-    for i in range(1,k):
-        d.append((a*d[i-1] + c)%m)
-        x.append(x[i-1] + d[i-1])
-    data.append(x)
+    d = [d1] * k
+    x = [x1] * k
+    for j in range(1, k):
+        d[j] = (a * d[j - 1] + c) % m
+        x[j] = x[j - 1] + d[j - 1]
+    data[i] = x
+
+    del x, x1, d, d1, a, c, m
 
 for i in range(n):
-    first_list = data[i]
     for j in range(i + 1, n):
-        second_list = data[j]
-        print(calc_item(k, first_list, second_list))
+        print(calc_item(k, data[i], data[j]))
+    data[i] = []
