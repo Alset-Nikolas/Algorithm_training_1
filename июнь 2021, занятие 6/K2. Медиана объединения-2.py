@@ -24,7 +24,6 @@ def count_big_x(list_A, x):
     return len(list_A) - i_left
 
 
-#
 def calc_item(k, A, B):
     min_x = min(A[0], B[0])
     max_x = max(A[-1], B[-1])
@@ -42,23 +41,21 @@ def calc_item(k, A, B):
     return min_x
 
 
-#
-#
-#
-n, k = list(map(int, input().split()))
-data = [[] for x in range(n)]
-for i in range(n):
-    x1, d1, a, c, m = list(map(int, input().split()))
-    d = [d1] * k
-    x = [x1] * k
-    for j in range(1, k):
-        d[j] = (a * d[j - 1] + c) % m
-        x[j] = x[j - 1] + d[j - 1]
-    data[i] = x
+if __name__ == '__main__':
+    n, k = list(map(int, input().split()))
+    data = [[] for x in range(n)]
+    for i in range(n):
+        x1, d1, a, c, m = list(map(int, input().split()))
+        d = [d1] * k
+        x = [x1] * k
+        for j in range(1, k):
+            d[j] = (a * d[j - 1] + c) % m
+            x[j] = x[j - 1] + d[j - 1]
+        data[i] = x
 
-    del x, x1, d, d1, a, c, m
+        del x, x1, d, d1, a, c, m
 
-for i in range(n):
-    for j in range(i + 1, n):
-        print(calc_item(k, data[i], data[j]))
-    data[i] = []
+    for i in range(n):
+        for j in range(i + 1, n):
+            print(calc_item(k, data[i], data[j]))
+        data[i] = []
