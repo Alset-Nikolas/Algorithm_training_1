@@ -1,3 +1,39 @@
+def calc_max_group(events):
+    best_people_saw = 0
+    peoples_look_first_video = set()
+    best_time_1 = 0
+    best_time_2 = 0
+
+    if len(events) == 0:
+        return 0, 5, 10
+    if len(events) == 2:
+        return 1, events[0][0], events[0][0] + 5
+    for i in range(len(events)):
+        time_event_i, prioritet, name_index_i, flag_i = events[i]
+        if flag_i == "came":
+            peoples_look_first_video.add(name_index_i)
+            if len(peoples_look_first_video) > best_people_saw:
+                best_people_saw = len(peoples_look_first_video)
+                best_time_1 = time_event_i
+                best_time_2 = best_time_1 + 5
+
+        count_peoples_look_second_video = 0
+        for j in range(i, len(events)):
+            time_event_j, prioritet, name_index_j, flag_j = events[j]
+            if flag_j == "came" and name_index_j not in peoples_look_first_video:
+                count_peoples_look_second_video += 1
+            if time_event_j - time_event_i >= 5 and len(
+                    peoples_look_first_video) + count_peoples_look_second_video > best_people_saw:
+                best_people_saw = len(peoples_look_first_video) + count_peoples_look_second_video
+                best_time_1 = time_event_i
+                best_time_2 = time_event_j
+            if flag_j == "gone" and name_index_j not in peoples_look_first_video:
+                count_peoples_look_second_video -= 1
+        if flag_i == "gone":
+            peoples_look_first_video.remove(name_index_i)
+    return best_people_saw, min(best_time_1, best_time_2), max(best_time_1, best_time_2)
+
+
 def main(times):
     events = []
     for i, time in enumerate(times):
@@ -5,42 +41,9 @@ def main(times):
         if end - start < 5:
             continue
         events.append([start, 1, i, "came"])
-        events.append([end, 2, i, "gone"])
+        events.append([end - 5, 2, i, "gone"])
     events.sort()
-    now_people = dict()
-    max_people = set()
-    max_people_2 = set()
-    ans_time = [1, 0]
-    for i, event in enumerate(events):
-        now_time, prioritet, index_person, flag = event
-
-        if flag == "came":
-            now_people[index_person] = now_time
-
-        group = set()
-        for person, time_start in now_people.items():
-            if now_time - time_start >= 5:
-                group.add(person)
-        if len(max_people) < len(group):
-            max_people_2 -= group
-            if len(max_people - group) > len(max_people_2):
-                max_people_2 = max_people - group
-                ans_time[1] = ans_time[0]
-            max_people = group
-            ans_time[0] = now_time - 5
-        else:
-            if len(group-max_people) > len(max_people_2):
-                max_people_2 = group - max_people
-                ans_time[1] = now_time - 5
-
-        if flag == "gone":
-            now_people.pop(index_person)
-    if ans_time[1] == 0:
-        times.sort(key=lambda x: x[1])
-        ans_time[1] = times[-1][1] + 10
-
-    ans_time.sort()
-    return len(max_people) + len(max_people_2), ans_time[0], ans_time[1]
+    return calc_max_group(events)
 
 
 if __name__ == '__main__':
@@ -50,4 +53,3 @@ if __name__ == '__main__':
         times.append(list(map(int, input().split())))
     res = main(times)
     print(*res)
-    assert main([[1,1], [2,2]]) == (0,1,12)
