@@ -32,7 +32,7 @@ if __name__ == '__main__':
         burn = datetime.datetime(day=day_burn, month=month_burn, year=year_burn).date()
         burn = burn.replace(year=burn.year + 18)
         die = datetime.datetime(day=day_die, month=month_die, year=year_die).date()
-        end_ = burn.replace(year=burn.year + 62) - datetime.timedelta(days=1)
+        end_ = burn.replace(year=burn.year + 62)
         if burn < die:
             events.append([burn, "1_burn_person", i + 1])
             if die > end_:
