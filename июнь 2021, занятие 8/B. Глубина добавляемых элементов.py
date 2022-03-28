@@ -22,13 +22,13 @@ class BinerTree:
             if start.value == val:
                 break
             h += 1
-            if h > self.h:
+            if h > self.depth:
                 self.depth = h
             if val < start.value:
                 left_start = start.left_person
                 if left_start is None:
                     start.left_person = BineryElement(val)
-                    start.right_person.depth = h
+                    start.left_person.depth = h
                     print(h, end=' ')
                     break
                 start = start.left_person
@@ -48,6 +48,6 @@ class BinerTree:
 if __name__ == '__main__':
     numbers = list(map(int, input().split()))
     BT = BinerTree(numbers[0])
-    print(BT.h, end=" ")
+    print(BT.depth, end=" ")
     for i, val in enumerate(numbers[1:-1]):
         BT.add_number(val)
