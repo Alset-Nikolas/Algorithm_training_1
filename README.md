@@ -1,7 +1,7 @@
 <h1 align="center"><a href='https://yandex.ru/yaintern/algorithm-training_1'>Тренировки по алгоритмам 1.0 от Яндекса</a></h1>
 <h1 align="center">Привет </a> 
 <img src="https://github.com/blackcater/blackcater/raw/main/images/Hi.gif" height="32"/></h1>
-<h3 align="center">Я проходил задания и свои решения разместил тут </h3>
+<h3 align="center">Я проходил тренировку и свои решения разместил тут </h3>
 
 #### Темы лекций:
 
